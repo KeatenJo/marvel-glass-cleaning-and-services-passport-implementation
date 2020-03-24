@@ -1,0 +1,227 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Marvel Glass Cleaning and Services</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="description" content="[Need a Homepage Description]">
+</head>
+<body>
+
+	<div id="wrapper">
+		<div id="titleContainer">
+			<div id="title">
+				<div id="styleTitle">
+					<h1>Marvel Glass Cleaning and Services</h1>
+					<h2>Admin Page</h2>
+				</div>
+			</div>
+		</div>
+
+		<div id="registerHero">
+			<div class="registerPanels right">
+				<h1 class="signInPadding">Welcome Back!</h1>
+				<h3 class="signInPadding">Continue editing your appointments by signing in.</h3>
+				<button class="signInPadding" id="showSignInFormButton"> SIGN IN </button>
+				<h4> or Sign Up</h4>
+
+			</div>
+		</div>
+
+		<div id="registerContainer">
+			<div class="registerPanels">
+				<h1> Create Account </h1>
+				<input type="text" placeholder="Name">
+				<input type="text" placeholder="Email">
+				<input type="text" placeholder="Password">
+				<button>CREATE ACCOUNT</button>
+			</div>
+			
+		</div>
+
+		<div id="signInFormContainer">
+			<div id="signInForm">
+				<h1 class="signInPadding"> Sign In </h1>
+				<h3 class="signInPadding"> Get connected and push your efficiency to the max.</h3>
+				<div id="inputContainer">
+						<input class="signInInputs" type="email" placeholder="Email">	
+						<input class="signInInputs" type="password" placeholder="Password">
+				</div>
+				<button class="signInButton" type="submit">SIGN IN</button>
+			</div>
+
+		</div>
+		
+		<div id="app">
+			<div id="header">
+				<div class="navDivs">
+					<div class="navButtons" v-on:click="onClickShowCreate">Create an Appointment</div>
+					<div class="navButtons" v-on:click="onClickShowUpdate">Update Appointment</div>
+				
+				</div>
+				<!--
+				<div class="navDivs">
+					<div class="navButtons">Retrieve appointment</div>
+					<div class="navButtons">GET A QUOTE</div>
+					<div class="navButtons">CONTACT US</div>
+
+				</div>
+				-->
+
+			</div>
+
+			<main>
+
+			<div id="retrieveDivContainer">
+				<div id="retrieveDiv" v-if="showRetrieveDiv">
+					<div>
+						<h3 class="listItemHeaders">id:</h3><span class="listItemSpans"> {{ retrievedAppointment._id }} </span>
+					</div>
+
+					<div>
+						<h3 class="listItemHeaders">Date:</h3><span class="listItemSpans"> {{ retrievedAppointment.date }} </span>
+					</div>
+
+					<div>
+						<h3 class="listItemHeaders">Time:</h3><span class="listItemSpans"> {{ retrievedAppointment.time }} </span>
+					</div>
+
+					<div>
+						<h3 class="listItemHeaders">Name:</h3><span class="listItemSpans"> {{ retrievedAppointment.name }} </span>
+					</div>
+					<div>
+						<h3 class="listItemHeaders">Phone:</h3><span class="listItemSpans"> {{ retrievedAppointment.phone }} </span>
+					</div>
+					<div>
+						<h3 class="listItemHeaders">Email:</h3><span class="listItemSpans"> {{ retrievedAppointment.email }} </span>
+					</div>
+					<div>
+						<h3 class="listItemHeaders">Address:</h3><span class="listItemSpans"> {{retrievedAppointment.address }} </span>
+					</div>
+					<div>
+						<h3 class="listItemHeaders">Notes:</h3><p> {{ retrievedAppointment.notes }} </p>
+					</div>
+
+				</div>
+			</div>
+				<div id="createAppointmentContainer" v-if="showCreateDiv || showUpdateDiv">
+					<div id="createAppointmentForm">
+						<h2 v-if="showCreateDiv">Create an Appointment:</h2>
+						<h2 v-if="showUpdateDiv">Update an Appointment:</h2>
+						<input type="text" placeholder="id" v-if="showUpdateDiv" v-model="id">
+						<input type="text" placeholder="Date" v-model="newDate">
+						<input type="text" placeholder="Time" v-model="newTime">
+						<input type="text" placeholder="Name" v-model="newName">
+						<input type="text" placeholder="Address" v-model="newAddress">
+						<input type="text" placeholder="Phone" v-model="newPhone">
+						<input type="text" placeholder="Email" v-model="newEmail">
+						<textarea type="text" rows="4" cols="50" placeholder="Notes" v-model="newNotes"></textarea>
+						<div class="CreateAppointmentDiv" v-if="showCreateDiv">
+							<button id="createQuoteButton" v-on:click="saveAppointmentToServer">Create!</button>
+						</div>
+						
+						<div class="CreateAppointmentDiv" v-if="showUpdateDiv">
+							<button id="createQuoteButton" v-on:click="updateAppointment">Update!</button>
+						</div>
+
+						<div v-if="errs.length > 0">
+							<ul>
+								<li v-for="err in errs">
+									{{err}}
+								</li>
+
+							</ul>
+
+						</div>
+
+
+						
+					</div>
+
+				</div>
+				<!--
+				<div id="app">
+					<div id="month_header">
+						<h2 @click='moveThisMonth'>
+							{{header.label}}
+						</h2>
+					</div>
+					<table align="center">
+					<tr class='weekdays'>
+						<th class='weekday' v-for='weekday in weekdays'>
+							{{weekday.label}}
+						</th>
+					</tr>
+					<tr class='week' v-for='week in weeks'>
+						<th class='day' :class='{today: day.isToday}' v-for='day in week'>
+							{{day.label}}
+						</th>
+					</tr>
+					</table>
+				</div>
+				--> 
+
+				<div id="quoteListContainer">
+					<div id="quoteListDiv">
+						<h2> Current Appointments </h2>
+						<ul id="quoteList">
+							<li v-for="appointment in appointments">
+							<div id="Quote/Appointment">
+								<div>
+									<h3 class="listItemHeaders">Name:</h3><span class="listItemSpans"> {{ appointment.name }} </span>
+								</div>
+								<div>
+									<h3 class="listItemHeaders">Phone:</h3><span class="listItemSpans"> {{ appointment.phone }} </span>
+								</div>
+								<div>
+									<h3 class="listItemHeaders">Email:</h3><span class="listItemSpans"> {{ appointment.email }} </span>
+								</div>
+								<div>
+									<h3 class="listItemHeaders">Address:</h3><span class="listItemSpans"> {{ appointment.address }} </span>
+								</div>
+								<div>
+									<h3 class="listItemHeaders">Notes:</h3><p> {{ appointment.notes }} </p>
+								</div>
+								<div id="submitButtonsContainer">
+									<button class="submitButtons" v-on:click="populateUpdateFields(appointment)">Update!</button>	
+									<button class="submitButtons delete" v-on:click="deleteAppointment(appointment)">Delete!</button>	
+									<button class="submitButtons" v-on:click="retrieveAppointment(appointment)">Retrieve!</button>	
+								</div>
+							</div>
+							</li>
+						</ul>	
+					</div>
+				</div>
+
+
+			</main>
+		</div>
+			<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>	
+			<script src="mainApp.js"></script>
+			<!-- <script src="calendar.js"></script> -->
+		<div class="footer">
+			<div id="footerContainer">
+				<div class="navDivs" id="bottomNavDiv">
+					<a href="index.html" class="navButtons active">HOME</a>
+					<a href="about-us.html" class="navButtons">ABOUT US</a>
+					<a href="services.html" class="navButtons">SERVICES</a>	
+					<a href="faq.html" class="navButtons">FAQ</a>
+					<a href="reviews.html" class="navButtons">REVIEWS</a>
+					<a href="contact-us.html" class="navButtons">CONTACT US</a>
+
+				</div>
+			<div id="contactDiv">
+				<h2>Contact Us</h2>
+				<h4>Marvel Windows</h4>
+				<h4>(435) 659-4319</h4>
+				<h4>PO Box 38</h4>
+				<h4>Henefer, UT 84033</h4>
+				<h1> Logo </h1>
+			</div>
+
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
+
