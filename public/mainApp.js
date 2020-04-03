@@ -79,7 +79,7 @@ var createSessionOnServer = function( email, password) {
 
 var createUserOnServer = function( firstname, email, password) {
 	var data = `email=${encodeURIComponent(email)}`;
-	data += `&firstName=${encodeURIComponent(password)}`;
+	data += `&firstName=${encodeURIComponent(firstname)}`;
 	data += `&plainTextPassword=${encodeURIComponent(password)}`;
 	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/users",  {
 		body: data,
