@@ -92,9 +92,7 @@ var createUserOnServer = function( firstname, email, password) {
 };
 
 var getSessionFromServer = function () {
-	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/sessions",  {
-		credentials: "include",
-	});	
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/sessions",  {credentials: "include"});	
 };
 
 
@@ -305,7 +303,6 @@ var app = new Vue({
 						this.signInFormPassword = "";
 						this.showExistingEmailWarning = false;
 						this.showWrongEmailPass = false;
-						this.listAppointments();
 						this.getSession();
 				} else { 
 					this.showExistingEmailWarning = true;
@@ -330,7 +327,6 @@ var app = new Vue({
 						this.signInFormPassword = "";
 						this.showExistingEmailWarning = false;
 						this.showWrongEmailPass = false;
-						this.listAppointments();
 						this.getSession();
 				} else { 
 					this.showWrongEmailPass = true;
@@ -355,7 +351,6 @@ var app = new Vue({
 						this.showExistingEmailWarning = false;
 						this.showWrongEmailPass = false;
 						this.listAppointments();
-						this.getSession();
 				} else { 
 				}
 
@@ -367,7 +362,6 @@ var app = new Vue({
 	
 	created: function () {
 		this.getSession();
-		this.listAppointments();
 	},
 
 });

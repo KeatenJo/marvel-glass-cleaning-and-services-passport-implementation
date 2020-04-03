@@ -30,6 +30,9 @@ passport.use(new passportLocal.Strategy ({
 
 }, function( email, plainTextPassword, done ) {
 
+	console.log(email);
+	console.log(plainTextPassword);
+
 	// First Get User from DB
 	model.User.findOne({email: email}).then(function(user) {
 		// If User does not exist in DB
@@ -39,6 +42,7 @@ passport.use(new passportLocal.Strategy ({
 		} else {
 			// User Exists in DB
 			user.verifyPassword(plainTextPassword, function(result) {
+				console.log(result);
 				if(result) {
 					// 	no errors, return user
 					return done(null, user);
@@ -72,6 +76,7 @@ passport.deserializeUser(function(userid, done) {
 
 // route for sessions
 app.post('/sessions', passport.authenticate('local'), function (req, res) {
+	console.log(req.user);
 	res.sendStatus(201);
 });
 app.get('/appointments', function (req, res) {
@@ -85,6 +90,18 @@ app.get('/appointments', function (req, res) {
 	});
 
 });
+
+app.get('/sessions', function (req, res) {
+	console.log(req.user);
+	if(req.user) {
+		res.json(req.user);
+	} else {
+		res.sendStatus(401); 
+	
+	}
+
+});
+
 
 // Retrieve Member
 app.get('/appointments/:appointmentId', function(req, res) {
@@ -223,15 +240,6 @@ app.post('/appointments', function (req, res) {
 	});
 });
 
-app.get('/sessions', function (req, res) {
-	if(req.user) {
-		res.json(req.user);
-	} else {
-		res.sendStatus(401); 
-	
-	}
-
-});
 
 app.listen(port, function () {
 	console.log(`Example app listening on port ${port}!`);
