@@ -225,9 +225,7 @@ app.post('/appointments', function (req, res) {
 
 app.get('/sessions', function (req, res) {
 	if(!req.user) {
-
 		res.sendStatus(401); 
-
 	}
 	res.json(req.user);
 	return;

@@ -340,7 +340,7 @@ var app = new Vue({
 
 		getSession: function () {
 			getSessionFromServer().then((response) => {
-				if(response.status == 201) {
+				if(response.status == 304) {
 						this.showSignInDiv = false;
 						this.showHeroDiv = false;
 						this.showContentDiv = true;
