@@ -58,7 +58,7 @@
 						<input class="signInInputs" type="email" placeholder="Email" v-model="signInFormEmail">	
 						<input class="signInInputs" type="password" placeholder="Password" v-model="signInFormPassword">
 				</div>
-				<button class="signInButton" type="submit">SIGN IN</button>
+				<button class="signInButton" v-on:click="createSession">SIGN IN</button>
 				<button class="createAccountShowDiv altcolor" v-on:click="onClickShowCreateAccountDiv"> or Create Account</button>
 				<h3 class="warnings" v-if="showWrongEmailPass">Wrong Email and/or Password.  Please Double Check and try again.</h3>
 
