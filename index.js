@@ -15,7 +15,7 @@ const port = process.env.PORT || 8080;
 
 
 app.use(bodyParser.urlencoded({extended: false }));
-app.use(cors({credentials: true, origin: 'https://marvel-glass-cleaning-passport.herokuapp.com/public/'}));
+app.use(cors({credentials: true, origin: 'https://marvel-glass-cleaning-passport.herokuapp.com/public/index.html'}));
 app.use('/public', express.static('public'));
 app.use('/images', express.static('images'));
 
