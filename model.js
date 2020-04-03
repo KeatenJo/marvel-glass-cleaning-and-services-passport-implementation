@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 mongoose.connect('mongodb+srv://KeatenJo:keaten@mgcs-cluster-c1p7v.mongodb.net/appointmentDb?retryWrites=true&w=majority', {
 	useNewUrlParser: true, 
@@ -40,9 +41,40 @@ var Appointment = mongoose.model('Appointment', {
 	}
 });
 
+var userSchema = new mongoose.Schema({
+	email: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	encryptedPassword: {
+		type: String,
+		required: true
+	},
+	firstName: {
+		type: String,
+		required: true
+	}
 
+});
+
+userSchema.methods.setEncryptedPassword = function (plainTextPassword, callbackFunction) {
+	bcrypt.hash(plainTextPassword, 12).then(hash => {
+		this.encryptedPassword = hash;
+		callbackFunction();
+	});
+};
+
+userSchema.methods.verifyPassword = function (plainTextPassword, callbackFunction) {
+	bcrypt.compare(plainTextPassword, this.encryptedPassword).then(result => {
+		callbackFunction(result);
+	});
+};
+
+var User = mongoose.model('User', userSchema);
 // how to export to be used in other files
 module.exports = {
 	Appointment: Appointment,
+	User: User
 };
 

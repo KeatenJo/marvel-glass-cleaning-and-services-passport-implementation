@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -7,8 +8,9 @@
 	<meta name="description" content="[Need a Homepage Description]">
 </head>
 <body>
-
 	<div id="wrapper">
+		<div id="app">
+
 		<div id="titleContainer">
 			<div id="title">
 				<div id="styleTitle">
@@ -18,41 +20,55 @@
 			</div>
 		</div>
 
-		<div id="registerHero">
+		<div id="registerHero" v-if="showHeroDiv">
 			<div class="registerPanels right">
 				<h1 class="signInPadding">Welcome Back!</h1>
 				<h3 class="signInPadding">Continue editing your appointments by signing in.</h3>
-				<button class="signInPadding" id="showSignInFormButton"> SIGN IN </button>
-				<h4> or Sign Up</h4>
+				<button class="signInPadding" id="showSignInFormButton" v-on:click="onClickShowSignInDiv"> SIGN IN </button>
+				<div>
+					<button class="createAccountShowDiv" v-on:click="onClickShowCreateAccountDiv"> or Sign Up</button>
+				</div>
 
 			</div>
 		</div>
 
-		<div id="registerContainer">
-			<div class="registerPanels">
-				<h1> Create Account </h1>
-				<input type="text" placeholder="Name">
-				<input type="text" placeholder="Email">
-				<input type="text" placeholder="Password">
-				<button>CREATE ACCOUNT</button>
+		<div id="registerContainer" v-if="showCreateAccountDiv">
+			<div class="registerContent">
+				<div class="registerInputsContainer">
+					<h1 class="signInPadding"> Create Account </h1>
+					<h3 class="signInPadding"> Create an account now to connect and push your efficiency.</h3>
+					<input class="signInInputs" type="text" placeholder="Name" v-model="createFormFirstName">
+					<input class="signInInputs" type="email" placeholder="Email" v-model="createFormEmail">
+					<input class="signInInputs" type="password" placeholder="Password" v-model="createFormPassword">
+				</div>
+					<button class="signInButton" v-on:click="onClickCreateUser">CREATE ACCOUNT</button>
+					<button class="createAccountShowDiv altcolor" v-on:click="onClickShowSignInDiv"> or Sign In</button>
+					<h3 class="warnings" v-if="showExistingEmailWarning">That email is already registered with an account.</h3>
+
+
 			</div>
 			
 		</div>
 
-		<div id="signInFormContainer">
+		<div id="signInFormContainer" v-if="showSignInDiv">
 			<div id="signInForm">
 				<h1 class="signInPadding"> Sign In </h1>
 				<h3 class="signInPadding"> Get connected and push your efficiency to the max.</h3>
 				<div id="inputContainer">
-						<input class="signInInputs" type="email" placeholder="Email">	
-						<input class="signInInputs" type="password" placeholder="Password">
+						<input class="signInInputs" type="email" placeholder="Email" v-model="signInFormEmail">	
+						<input class="signInInputs" type="password" placeholder="Password" v-model="signInFormPassword">
 				</div>
 				<button class="signInButton" type="submit">SIGN IN</button>
+				<button class="createAccountShowDiv altcolor" v-on:click="onClickShowCreateAccountDiv"> or Create Account</button>
+				<h3 class="warnings" v-if="showWrongEmailPass">Wrong Email and/or Password.  Please Double Check and try again.</h3>
+
+
 			</div>
 
 		</div>
+
+		<div id="contentWrapper" v-if="showContentDiv">
 		
-		<div id="app">
 			<div id="header">
 				<div class="navDivs">
 					<div class="navButtons" v-on:click="onClickShowCreate">Create an Appointment</div>
@@ -108,13 +124,13 @@
 					<div id="createAppointmentForm">
 						<h2 v-if="showCreateDiv">Create an Appointment:</h2>
 						<h2 v-if="showUpdateDiv">Update an Appointment:</h2>
-						<input type="text" placeholder="id" v-if="showUpdateDiv" v-model="id">
-						<input type="text" placeholder="Date" v-model="newDate">
-						<input type="text" placeholder="Time" v-model="newTime">
-						<input type="text" placeholder="Name" v-model="newName">
-						<input type="text" placeholder="Address" v-model="newAddress">
-						<input type="text" placeholder="Phone" v-model="newPhone">
-						<input type="text" placeholder="Email" v-model="newEmail">
+						<input class="inputs" type="text" placeholder="id" v-if="showUpdateDiv" v-model="id">
+						<input class="inputs" type="text" placeholder="Date" v-model="newDate">
+						<input class="inputs" type="text" placeholder="Time" v-model="newTime">
+						<input class="inputs" type="text" placeholder="Name" v-model="newName">
+						<input class="inputs" type="text" placeholder="Address" v-model="newAddress">
+						<input class="inputs" type="text" placeholder="Phone" v-model="newPhone">
+						<input class="inputs" type="text" placeholder="Email" v-model="newEmail">
 						<textarea type="text" rows="4" cols="50" placeholder="Notes" v-model="newNotes"></textarea>
 						<div class="CreateAppointmentDiv" v-if="showCreateDiv">
 							<button id="createQuoteButton" v-on:click="saveAppointmentToServer">Create!</button>
@@ -222,6 +238,7 @@
 			</div>
 		</div>
 	</div>	
+	</div>
 </body>
 </html>
 

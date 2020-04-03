@@ -1,11 +1,16 @@
 //List FUNCTION// GET (COLLECTION) REQUEST
+https://marvel-glass-cleaning-passport.herokuapp.com/
 var getAppointmentsFromServer = function () {
-  return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments");
+  return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments", {
+	credentials: "include"
+  });
 };
 
 //RETRIVE FUNCTION// GET (MEMBER) REQUEST
 var getAppointmentFromServer = function (_id) {
-  return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments/" + _id);
+  return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments" + _id, {
+	credentials: "include" 
+  });
 };
 
 
@@ -18,9 +23,10 @@ var createAppointmentOnServer = function(newName, newDate, newAddress, newPhone,
 	data += `&email=${encodeURIComponent(newEmail)}`;
 	data += `&notes=${encodeURIComponent(newNotes)}`;
 	data += `&time=${encodeURIComponent(newTime)}`;
-	return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments", {
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments", {
 		body: data,
 		method: "POST",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
 		}
@@ -37,9 +43,10 @@ var updateAppointmentOnServer = function( _id, newName, newDate, newAddress, new
 	data += `&email=${encodeURIComponent(newEmail)}`;
 	data += `&notes=${encodeURIComponent(newNotes)}`;
 	data += `&time=${encodeURIComponent(newTime)}`;
-	return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments/" + _id, {
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments/" + _id, {
 		body: data,
 		method: "PUT",
+		credentials: "include",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
 		}
@@ -48,8 +55,10 @@ var updateAppointmentOnServer = function( _id, newName, newDate, newAddress, new
 };
 
 var deleteAppointmentOnServer = function(_id) {
-	return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments/" + _id, {
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments/" + _id, {
 		method: "DELETE",
+		credentials: "include",
+
 	});
 };
 
@@ -72,6 +81,17 @@ var app = new Vue({
 		appointments: [],
 		showUpdateDiv: false,
 		showCreateDiv: false,
+		showSignInDiv: false,
+		showCreateAccountDiv: false,
+		showHeroDiv: true,
+		showContentDiv: false,
+		createFormEmail: "",
+		createFormPassword: "",
+		createFormFirstName: "",
+		signInFormEmail: "",
+		signInFormPassword: "",
+		showExistingEmailWarning: false,
+		showWrongEmailPass: false,
 		errs: [],
 
 	},
@@ -114,12 +134,24 @@ var app = new Vue({
 			this.showRetrieveDiv = false;
 		},
 
+		onClickShowCreateAccountDiv: function () {
+			this.showCreateAccountDiv = true;
+			this.showSignInDiv = false;
+			this.showHeroDiv = false;
+
+		},
+
+		onClickShowSignInDiv: function () {
+			this.showCreateAccountDiv = false;
+			this.showSignInDiv = true;
+			this.showHeroDiv = false;
+
+		},
+
 		onClickShowUpdate: function () {
 			this.showUpdateDiv = true;
 			this.showCreateDiv = false;
 			this.showRetrieveDiv = false;
-
-
 		},
 
 		listAppointments: function () {
@@ -224,6 +256,32 @@ var app = new Vue({
 				});
 			}
 		},
+
+		onClickCreateUser: function () {
+			createUserOnServer( this.createFormFirstName, this.createFormEmail, this.createPassword).then((response) => {
+				if(response.status == 201) {
+						this.listAppointments();
+				} else { 
+					this.showExistingEmailWarning = true;
+				}
+
+			});
+
+
+		},
+		
+		createSession: function () {
+			createSessionOnServer( this.signInFormEmail, this.signInFormPassword).then((response) => {
+				if(response.status == 201) {
+						this.listAppointments();
+				} else { 
+					this.showWrongEmailPass = true;
+				}
+
+			});
+
+		},
+
 	},
 	
 	created: function () {

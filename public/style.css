@@ -18,6 +18,35 @@ body {
 
 }
 
+.warnings {
+	color: red;
+}
+
+.signInInputs:focus {
+	border-bottom: 3px solid #0080FF;
+	
+}
+
+.signInInputs {
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	display: block;
+	border: solid 2px #808588;
+	border-top: 0;
+	border-right: 0;
+	border-left: 0;
+	outline: none;
+	padding: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 3em;
+	padding-bottom: 0.5em;
+	font-size: 1.3em;
+	font-family: Lato;
+	color: #0080FF;
+	width: 25%;
+}
+
 #title{
 	text-align: center;
 	position: relative;
@@ -134,11 +163,9 @@ p {
 
 
 #app{
-	display: none;
-	padding: 2em;
-	margin: 0 auto;
+	height: 100%;
+	position: relative;
 	text-align: center;
-	border: solid 2px;
 }
 
 #month_header{
@@ -232,12 +259,12 @@ table {
 	color: #0080FF;
 }
 
-input[type=text]:focus {
+.inputs:focus {
 	border: 3px solid #0080FF;
 
 }
 
-input[type=text] {
+.inputs {
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
@@ -379,15 +406,48 @@ li {
 
 #registerContainer {
 	position: relative;
-	display: flex;
 	padding: 1em;
-	text-align: center;
+	color: #0080FF;
 }
 
 .registerPanels {
-	flex: 1;
 	padding: 1em;
 }	
+.registerContent {
+	padding: 2em;
+	border: solid 0.2em #0080FF;
+	border-radius: 1em;
+	color: #0080FF;
+	position: relative;
+
+}
+.createAccountShowDiv:hover {
+	color: #0080FF;
+}
+
+.createAccountShowDiv {
+	padding: 2em;
+	border: none;
+	background-color: transparent;
+	outline: none;
+	color: white;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	font-family: Lato;
+	font-size: 1em;
+}
+
+.createAccountShowDiv.altcolor {
+	color: #0080FF;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+
+}
+
+.createAccountShowDiv.altcolor:hover {
+	transform: scale(1.5, 1.5);
+}
+
 .registerPanels.right {
 	font-family: Lato;
 	padding-top: 2em;
@@ -428,6 +488,9 @@ li {
 
 
 #registerHero {
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+
 	flex: 1;
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/SignInPanelHero.png");
 
@@ -463,21 +526,11 @@ li {
 	position: relative;
 }
 
-.signInInputs {
-	display: block;
-	border: solid 2px #808588;
-	border-top: 0;
-	border-right: 0;
-	border-left: 0;
-	outline: none;
-	padding: 1em;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 3em;
-	padding-bottom: 0.5em;
-	font-size: 1.3em;
-	font-family: Lato;
-	color: #0080FF;
+
+.registerInputsContainer {
+	text-align: center;
+	padding-bottom: 3em;
+
 }
 
 #inputContainer {
