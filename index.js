@@ -30,12 +30,11 @@ passport.use(new passportLocal.Strategy ({
 
 }, function( email, plainTextPassword, done ) {
 
-	console.log(email);
-	console.log(plainTextPassword);
 
 	// First Get User from DB
 	model.User.findOne({email: email}).then(function(user) {
 		// If User does not exist in DB
+		console.log(user);
 		if(!user) {
 				//  no errors, no user
 			return done(null, false);
@@ -76,7 +75,6 @@ passport.deserializeUser(function(userid, done) {
 
 // route for sessions
 app.post('/sessions', passport.authenticate('local'), function (req, res) {
-	console.log(req.user);
 	res.sendStatus(201);
 });
 app.get('/appointments', function (req, res) {
@@ -92,7 +90,6 @@ app.get('/appointments', function (req, res) {
 });
 
 app.get('/sessions', function (req, res) {
-	console.log(req.user);
 	if(req.user) {
 		res.json(req.user);
 	} else {
