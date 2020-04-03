@@ -50,4 +50,4 @@ Appointments:
 	* required: true
 
 # Heroku Link #
-https://marvel-glass-cleaning-services.herokuapp.com/static/
+https://marvel-glass-cleaning-passport.herokuapp.com/public/
