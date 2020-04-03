@@ -59,7 +59,7 @@ var userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.setEncryptedPassword = function (plainTextPassword, callbackFunction) {
-	bcrypt.hash(plainTextPassword, 12).then(hash => {
+	bcrypt.hash(plainTextPassword, 12).then((hash) => {
 		this.encryptedPassword = hash;
 		callbackFunction();
 	});

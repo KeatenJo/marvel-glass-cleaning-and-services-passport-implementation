@@ -68,6 +68,7 @@ var createSessionOnServer = function( email, password) {
 	var data = `email=${encodeURIComponent(email)}`;
 	data += `&plainTextPassword=${encodeURIComponent(password)}`;
 	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/sessions",  {
+	//return fetch("http:localhost:8080/sessions",  {
 		body: data,
 		method: "POST",
 		credentials: "include",
@@ -315,6 +316,7 @@ var app = new Vue({
 		
 		createSession: function () {
 			createSessionOnServer( this.signInFormEmail, this.signInFormPassword).then((response) => {
+				console.log(response);
 				if(response.status == 201) {
 						this.showCreateAccountDiv = false;
 						this.showSignInDiv = false;
