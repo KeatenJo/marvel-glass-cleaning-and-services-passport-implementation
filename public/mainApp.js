@@ -57,12 +57,11 @@ var updateAppointmentOnServer = function( _id, newName, newDate, newAddress, new
 };
 
 var deleteAppointmentOnServer = function(_id) {
-	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments/" + _id, {
+	return fetch("https://marvel-glass-cleaning-services.herokuapp.com/appointments/" + _id, {
 		method: "DELETE",
 		credentials: "include",
-		}
-
 	});
+
 };
 
 var createSessionOnServer = function( email, password) {
