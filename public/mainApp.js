@@ -295,6 +295,7 @@ var app = new Vue({
 		onClickCreateUser: function () {
 			createUserOnServer( this.createFormFirstName, this.createFormEmail, this.createPassword).then((response) => {
 				if(response.status == 201) {
+						this.showCreateAccountDiv = false;
 						this.showSignInDiv = false;
 						this.showHeroDiv = false;
 						this.showContentDiv = true;
@@ -305,8 +306,8 @@ var app = new Vue({
 						this.signInFormPassword = "";
 						this.showExistingEmailWarning = false;
 						this.showWrongEmailPass = false;
-
 						this.listAppointments();
+						this.getSession();
 				} else { 
 					this.showExistingEmailWarning = true;
 				}
@@ -319,6 +320,7 @@ var app = new Vue({
 		createSession: function () {
 			createSessionOnServer( this.signInFormEmail, this.signInFormPassword).then((response) => {
 				if(response.status == 201) {
+						this.showCreateAccountDiv = false;
 						this.showSignInDiv = false;
 						this.showHeroDiv = false;
 						this.showContentDiv = true;
