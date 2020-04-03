@@ -1,10 +1,12 @@
 //List FUNCTION// GET (COLLECTION) REQUEST
-https://marvel-glass-cleaning-passport.herokuapp.com/
+//https://marvel-glass-cleaning-passport.herokuapp.com/
 var getAppointmentsFromServer = function () {
   return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments", {
 	credentials: "include"
   });
 };
+
+
 
 //RETRIVE FUNCTION// GET (MEMBER) REQUEST
 var getAppointmentFromServer = function (_id) {
@@ -58,11 +60,37 @@ var deleteAppointmentOnServer = function(_id) {
 	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/appointments/" + _id, {
 		method: "DELETE",
 		credentials: "include",
+		}
 
 	});
 };
 
+var createSessionOnServer = function( email, password) {
+	var data = `email=${encodeURIComponent(email)}`;
+	data += `&plainTextPassword=${encodeURIComponent(password)}`;
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/sessions",  {
+		body: data,
+		method: "POST",
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		}
+	});
+};
 
+var createUserOnServer = function( firstname, email, password) {
+	var data = `email=${encodeURIComponent(email)}`;
+	data += `&firstName=${encodeURIComponent(password)}`;
+	data += `&plainTextPassword=${encodeURIComponent(password)}`;
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/users",  {
+		body: data,
+		method: "POST",
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		}
+	});
+};
 
 var app = new Vue({
 	el: "#app",
