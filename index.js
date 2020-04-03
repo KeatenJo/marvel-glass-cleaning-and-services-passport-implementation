@@ -17,6 +17,7 @@ const port = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({extended: false }));
 app.use(cors({credentials: true, origin: 'null, https://marvel-glass-cleaning-services.herokuapp.com/public/'}));
 app.use('/static', express.static('public'));
+app.use('/static', express.static('images'));
 
 app.use(session({ secret:"Somepeoplethinksciencedon'tbedatwaybutitdo", resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
