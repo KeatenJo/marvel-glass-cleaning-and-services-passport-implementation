@@ -223,6 +223,15 @@ app.post('/appointments', function (req, res) {
 	});
 });
 
+app.get('/sessions', function (req, res) {
+	if(!req.user) {
+		res.json(req.user);
+		return;
+	}
+	res.sendStatus(401);
+
+});
+
 app.listen(port, function () {
 	console.log(`Example app listening on port ${port}!`);
 });

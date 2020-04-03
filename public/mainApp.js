@@ -91,6 +91,13 @@ var createUserOnServer = function( firstname, email, password) {
 	});
 };
 
+var getSessionFromServer = function () {
+	return fetch("https://marvel-glass-cleaning-passport.herokuapp.com/sessions",  {
+		credentials: "include",
+	});	
+};
+
+
 var app = new Vue({
 	el: "#app",
 	data: {
@@ -287,6 +294,7 @@ var app = new Vue({
 		onClickCreateUser: function () {
 			createUserOnServer( this.createFormFirstName, this.createFormEmail, this.createPassword).then((response) => {
 				if(response.status == 201) {
+						this.showSignInDiv = false;
 						this.showHeroDiv = false;
 						this.showContentDiv = true;
 						this.createFormEmail =  "";
@@ -310,6 +318,7 @@ var app = new Vue({
 		createSession: function () {
 			createSessionOnServer( this.signInFormEmail, this.signInFormPassword).then((response) => {
 				if(response.status == 201) {
+						this.showSignInDiv = false;
 						this.showHeroDiv = false;
 						this.showContentDiv = true;
 						this.createFormEmail =  "";
@@ -320,8 +329,31 @@ var app = new Vue({
 						this.showExistingEmailWarning = false;
 						this.showWrongEmailPass = false;
 						this.listAppointments();
+						this.getSession();
 				} else { 
 					this.showWrongEmailPass = true;
+				}
+
+			});
+
+		},
+
+		getSession: function () {
+			getSessionFromServer().then((response) => {
+				if(response.status == 201) {
+						this.showSignInDiv = false;
+						this.showHeroDiv = false;
+						this.showContentDiv = true;
+						this.createFormEmail =  "";
+						this.createFormPassword = "";
+						this.createFormFirstName = "";
+						this.signInFormEmail = "";
+						this.signInFormPassword = "";
+						this.showExistingEmailWarning = false;
+						this.showWrongEmailPass = false;
+						this.listAppointments();
+						this.getSession();
+				} else { 
 				}
 
 			});
@@ -331,6 +363,7 @@ var app = new Vue({
 	},
 	
 	created: function () {
+		this.getSession();
 		this.listAppointments();
 	},
 
