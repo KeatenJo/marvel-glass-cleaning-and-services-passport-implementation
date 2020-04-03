@@ -189,7 +189,6 @@ var app = new Vue({
 		},
 
 		listAppointments: function () {
-			this.getSession();
 			getAppointmentsFromServer().then((response) => {
 				response.json().then((appointments) => {
 					this.appointments = appointments;
