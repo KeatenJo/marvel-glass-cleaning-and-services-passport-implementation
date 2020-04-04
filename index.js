@@ -123,7 +123,7 @@ app.get('/appointments/:appointmentId', function(req, res) {
 		return;
 	});
 });
-app.options('/appointments/:appointmentId', cors()) // enable pre-flight request for DELETE request
+//app.options('/appointments/:appointmentId', cors()) // enable pre-flight request for DELETE request
 app.delete('/appointments/:appointmentId', function(req, res) {
 	if(!req.user) {
 		res.sendStatus(401);
@@ -145,7 +145,7 @@ app.delete('/appointments/:appointmentId', function(req, res) {
 	
 });
 
-app.options('/appointments/:appointmentId', cors()) // enable pre-flight request for PUT request
+//app.options('/appointments/:appointmentId', cors()) // enable pre-flight request for PUT request
 app.put('/appointments/:appointmentId', function (req, res) {
 	if(!req.user) {
 		res.sendStatus(401);
