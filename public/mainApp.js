@@ -294,9 +294,9 @@ var app = new Vue({
 			createUserOnServer( this.createFormFirstName, this.createFormEmail, this.createFormPassword).then((response) => {
 				if(response.status == 201) {
 						this.showCreateAccountDiv = false;
-						this.showSignInDiv = false;
+						this.showSignInDiv = true;
 						this.showHeroDiv = false;
-						this.showContentDiv = true;
+						this.showContentDiv = false;
 						this.createFormEmail =  "";
 						this.createFormPassword = "";
 						this.createFormFirstName = "";
