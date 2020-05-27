@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb+srv://KeatenJo:keaten@mgcs-cluster-c1p7v.mongodb.net/appointmentDb?retryWrites=true&w=majority', {
+mongoose.connect('secret', {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true
 });
