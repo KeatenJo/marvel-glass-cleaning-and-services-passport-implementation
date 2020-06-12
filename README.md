@@ -3,6 +3,11 @@
 	
 ## Conforms to Rest API standards, as well as CORS. 
 
+![Screenshot (30)](https://user-images.githubusercontent.com/31744894/84464508-ed219f00-ac31-11ea-8f71-baf45d3f02e0.png)
+![Screenshot (31)](https://user-images.githubusercontent.com/31744894/84464513-ef83f900-ac31-11ea-9b61-46f5eb28a73f.png)
+![Screenshot (32)](https://user-images.githubusercontent.com/31744894/84464519-f3178000-ac31-11ea-89d2-fb96fb500c05.png)
+![Screenshot (33)](https://user-images.githubusercontent.com/31744894/84464523-f4e14380-ac31-11ea-9e72-dcfa375f7ea2.png)
+
 # Resource Name
 ## Appointments
 
