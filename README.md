@@ -1,3 +1,8 @@
+## This is a web application that support CRUD operations.
+	Implemented in Express.js, VUE.js, HTML, CSS#
+	
+## Conforms to Rest API standards, as well as CORS. 
+
 # Resource Name
 ## Appointments
 
